@@ -1,0 +1,223 @@
+package database;
+import java.sql.*;
+import java.util.*;
+public class Kbc {
+	//private static final String n = null;
+	Scanner s = new Scanner(System.in);
+	Connection con =null;
+	 int score = 0;
+	
+	public void connect()
+	{
+		String url  = "jdbc:mysql://localhost:3306/application";
+		String dbname = "application";
+		String driver = "com.mysql.jdbc.Driver";
+		String username = "root";
+		String pass = "";
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			con =   DriverManager.getConnection(url,username,pass);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 System.out.println("Data is Connected");
+	}
+	public void write()
+	{     
+		do {
+		System.out.println("Enter the id, name and email from user:   ");
+		String id  = s.next();
+		String name = s.next();
+		String email = s.next();
+		PreparedStatement ps ;
+		String query  = "Insert into quiz(id,name,email,score) values(?,?,?,0)";
+		try {
+			ps = con.prepareStatement(query);
+			ps.setString(1, id);
+			ps.setString(2,name);
+			ps.setString(3,email);
+			if(ps.execute())
+			{
+				System.out.println("Some Error");
+			}
+			else
+			{
+				System.out.println("Data Stored");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("*********CHOICE OF GAME PLAY***********");
+		System.out.println("1)Demo Game\n2)Java Quiz: ");
+		System.out.println("Choose the option : ");
+		int n = s.nextInt();
+		switch(n)
+		{
+		case 1:
+			System.out.println("*************WELCOME TO DEMO QUIZ*******************");
+			System.out.println("What is the First color of indian flag?\n a)orange\nb)green\nc)white\nd)none of these");
+			System.out.println("Choose the  correct option:");
+			String opt = s.next();
+			if(opt.equals("a"))
+			{
+				System.out.println("Your is answer abosultely correct"+"\nYou got 10 points");
+			}
+			else
+			{
+				System.out.println("Wrong Answer!"+"You got 0 score marks");
+			}
+			break;
+		case 2:
+			System.out.println("*************WELCOME TO JAVA QUIZ*******************");
+			System.out.println("1) Which of the following is not a keyword in java?\nA)Static\nB)Boolean\nC)Void\nD)Private");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("B"))
+			{
+				System.out.println("Answer is correct: "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);
+			}
+			System.out.println("2) What is the size of long variable?\nA)8bit\nB)16bit\nC)32bit\nD)64bit");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("D"))
+			{
+				System.out.println("Answer is correct : "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer :"+ "\nYour is score :"+score);
+			}
+			System.out.println("3) What is the default value of short variable?\nA)0.0\nB)0\nC)null\nD)none of these");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("A"))
+			{
+				System.out.println("Answer is correct : "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer : "+"\nYour is score :" +score);
+			}
+			System.out.println(" 4) In which case, a program is expected to recover?\nIf an error occurs\nB)if an expection occurs\nC)Both of the above\nD)None of above");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("B"))
+			{
+				System.out.println("Answer is correct : "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);	
+			}
+			System.out.println("5)Which sql we add another column in the table?\nA)Create\nB)Update\nC)Alter\nD)None of the above");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("C"))
+			{
+				System.out.println("Answer is correct: "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);	
+			}
+			System.out.println("6)Which of the following is not a java features?\nA)Dynamic\nB)Architecture Neutral\nC)Use of pointers\nD)Oject-Oriented");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("C"))
+			{
+				System.out.println("Answer is correct: "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);	
+			}
+			System.out.println("7)______is used to find and fix bugs in the Java\nA)JVM\nB)JRE\nC)JDK\nD)JDB");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("D"))
+			{
+				System.out.println("Answer is correct: "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);	
+			}
+			System.out.println("8)What is the return type of the hashCode()method in the Object class?\nA)Object\nB)int\nC)long\nD)void");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("B"))
+			{
+				System.out.println("Answer is correct: "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);	
+			}
+			System.out.println("9)In Which process a local variabel has the same name as one of the instance variabls?\nA)Serialization\nB)Variable Showing\nC)Abstraction\nD)Mulit-Threading");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("B"))
+			{
+				System.out.println("Answer is correct: "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);	
+			}
+			System.out.println("10)Which package contains the random class?\nA)java.util pacakage\nB)java.lang package\nC)java.awt package\nD)java.io package");
+			System.out.println("Choose the option:");
+		    opt = s.next();
+			if(opt.equals("A"))
+			{
+				System.out.println("Answer is correct: "+(score+=10));
+			}
+			else
+			{
+				System.out.println("Wrong answer "+ "\nYour is score :"+score);	
+			}
+			System.out.println("Total score is : "+ score);
+			System.out.println("**********ENTER YOUR DETAILS***********");
+			System.out.println("Enter record  id: ");
+			 id = s.next();
+			System.out.println("Enter your recorded  name and  email  :");
+			 name =s.next();
+			 email = s.next();
+			 System.out.println("Enter your total score : ");
+			score = s.nextInt();
+			 query  = "update quiz set name =?,email =?,score =? where id = "+id;
+			try {
+				ps = con.prepareStatement(query);
+				ps.setString(1,name);
+				ps.setString(2,email);
+				ps.setInt(3,score);
+				ps.executeUpdate();
+				System.out.println("Data is Updated");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			default:
+				System.out.println("Invaild Option");
+		}
+		
+		}while(true);
+	}
+	public static void main(String args[])
+	{
+		Kbc k = new Kbc();
+		k.connect();
+		k.write();
+	}
+}
